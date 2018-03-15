@@ -391,6 +391,35 @@
 				"description": ""
 			},
 			"response": []
+		},
+		{
+			"name": "err creatmovie without actores",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Title\": \"Batman-2\",\n\t\"Year\": \"2008\",\n\t\"Genre\": \"Fantasy\"\n}\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/createmovie",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createmovie"
+					]
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
