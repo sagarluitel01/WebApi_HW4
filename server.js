@@ -115,7 +115,7 @@ router.post('/createmovie', function (req, res) {
 
 });
 
-router.route('/update/:movieID')
+router.route('/update/:movieID') //******----***********
     .put(authJwtController.isAuthenticated, function (req, res) {
         var id = req.params.movieID;
         Movie.findById(id, function(err, movie) {
