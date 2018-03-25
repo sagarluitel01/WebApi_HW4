@@ -3,7 +3,6 @@ var Schema = mongoose.Schema;
 
 mongoose.connect('mongodb://sagar01:D3goldhap@ds111535.mlab.com:11535/webapidatabase');
 
-// movie schema
 var MovieSchema = new Schema({
     Title: String,
     Year: String,

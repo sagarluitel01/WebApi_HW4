@@ -117,28 +117,29 @@ router.post('/createmovie', function (req, res) {
 
 router.route('/update/:movieID')
     .put(authJwtController.isAuthenticated, function (req, res) {
-        var mid = req.params.movieID;
-        Movie.findById(mid, function (err, movie) {
+        var id = req.params.movieID;
+        Movie.findById(id, function(err, movie) {
             if (err) res.send(err);
-            if(req.body.Title){
+
+            if (req.body.Title) {
                 movie.Title = req.body.Title;
             }
-            if(req.body.Year){
+            if (req.body.Year) {
                 movie.Year = req.body.Year;
             }
-            if(req.body.Genre){
+            if (req.body.Genre) {
                 movie.Genre = req.body.Genre;
             }
-            if(req.body.Actors){
+            if (req.body.Actors) {
                 movie.Actors = req.body.Actors;
             }
-            movie.save(function (err) {
-                if(err)
+            movie.save(function(err) {
+                if (err) {
                     return res.send(err);
-            })
-            res.json({ success: true, message: "Update successful" });
-        })
-
+                }
+                res.json({ message: 'Update successful' });
+            });
+        });
     });
 
 router.route('/get').get(authJwtController.isAuthenticated,
