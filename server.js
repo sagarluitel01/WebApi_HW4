@@ -5,6 +5,7 @@ var authJwtController = require('./auth_jwt');
 var User = require('./Users');
 var jwt = require('jsonwebtoken');
 var Movie = require('./Movie');
+var Review = require('./Review');
 
 var app = express();
 app.use(bodyParser.json());
@@ -110,6 +111,23 @@ router.post('/createmovie', function (req, res) {
                 return res.send(err);
             }
             res.json({ message: 'Movie created!' });
+        });
+    }
+
+});
+
+router.post('/CreateReview', function (req, res) {
+    if (!req.body.Reviewer || !req.body.Review || !req.body.Rating) {
+        res.json({success: false, msg: 'you are missing something.'});
+    }
+    else {
+        var newReview = new Review(req.body);
+
+        newReview.save(function(err) {
+            if (err) {
+                return res.send(err);
+            }
+            res.json({ message: 'Review created!' });
         });
     }
 
