@@ -116,23 +116,6 @@ router.post('/createmovie', function (req, res) {
 
 });
 
-router.post('/CreateReview', function (req, res) {
-    if (!req.body.Reviewer || !req.body.Review || !req.body.Rating) {
-        res.json({success: false, msg: 'you are missing something.'});
-    }
-    else {
-        var newReview = new Review(req.body);
-
-        newReview.save(function(err) {
-            if (err) {
-                return res.send(err);
-            }
-            res.json({ message: 'Review created!' });
-        });
-    }
-
-});
-
 router.route('/update/:movieID') //******----***********
     .put(authJwtController.isAuthenticated, function (req, res) {
         var id = req.params.movieID;
@@ -176,6 +159,32 @@ router.delete('/delete/:movieID', authJwtController.isAuthenticated, function (r
         movie.remove();
         res.json({ success: true, message: 'The movie is successfully deleted.' });
     });
+});
+
+router.post('/CreateReview', function (req, res) {
+
+    var movie = req.body.movie;
+
+    Movie.find({Title: movie},
+        function (err) {
+            if (err) res.send(err);
+
+            var newReview = new Review(req.body);
+
+            newReview.save(function (err) {
+                if(err) res.send(err);
+
+            })
+            res.send({success: "Rewiew created"})
+        });
+});
+
+router.route('/getRev').get(
+    function (req, res) {
+        Review.find(function (err, reviews) {
+            if (err) res.send(err);
+            res.json(reviews);
+        });
 });
 
 app.use('/', router);
