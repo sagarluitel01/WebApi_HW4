@@ -6,6 +6,7 @@ var User = require('./Users');
 var jwt = require('jsonwebtoken');
 var Movie = require('./Movie');
 var Review = require('./Review');
+var async = require('async');
 
 var app = express();
 app.use(bodyParser.json());
@@ -57,10 +58,8 @@ router.post('/signup', function(req, res) {
         user.name = req.body.name;
         user.username = req.body.username;
         user.password = req.body.password;
-        // save the user
         user.save(function(err) {
             if (err) {
-                // duplicate entry
                 if (err.code == 11000)
                     return res.json({ success: false, message: 'A user with that username already exists. '});
                 else
@@ -94,8 +93,6 @@ router.post('/signin', function(req, res) {
                 res.status(401).send({success: false, msg: 'Authentication failed. Wrong password.'});
             }
         });
-
-
     });
 });
 
@@ -161,7 +158,7 @@ router.delete('/delete/:movieID', authJwtController.isAuthenticated, function (r
     });
 });
 
-router.post('/CreateReview', function (req, res) {
+router.post('/CreateReview', authJwtController.isAuthenticated, function (req, res) {
 
     var movie = req.body.movie;
 
@@ -172,20 +169,45 @@ router.post('/CreateReview', function (req, res) {
             var newReview = new Review(req.body);
 
             newReview.save(function (err) {
-                if(err) res.send(err);
-
+                if(err) {
+                    res.send(err);
+                }
             })
             res.send({success: "Rewiew created"})
         });
 });
 
-router.route('/getRev').get(
+router.route('/getAllRev').get(
     function (req, res) {
         Review.find(function (err, reviews) {
-            if (err) res.send(err);
+            if (err) {res.send(err);}
             res.json(reviews);
         });
 });
+
+router.route('/getMovieReview').get(
+    function (req, res) {
+        if (req.query.Review ==='true') {
+            Movie.aggregate([
+                {
+                    $lookup:{
+                        from: "reviews",
+                        localField: "Title",
+                        foreignField: "Movie",
+                        as: 'review'
+                    }
+                }
+                ], function (err, result) {
+                if(err) {res.send(err);}
+                else res.send({Movie: result});
+            });
+        }else {
+            Movie.find({}, function (err, movies) {
+                if(err) {res.send(err);}
+                res.json({Movie: movies});
+                })
+        }
+    });
 
 app.use('/', router);
 app.listen(process.env.PORT || 8080);
