@@ -163,18 +163,23 @@ router.post('/CreateReview', authJwtController.isAuthenticated, function (req, r
 
     var movie = req.body.movie;
 
-    Movie.find({Title: movie},
-        function (err) {
+    Movie.findOne({Title: req.body.Movie},
+        function (err, movie){
             if (err) res.send(err);
 
-            var newReview = new Review(req.body);
+            if(movie) {
+                var newReview = new Review(req.body);
 
-            newReview.save(function (err) {
-                if(err) {
-                    res.send(err);
-                }
-            })
-            res.send({success: "Rewiew created"})
+                newReview.save(function (err) {
+                    if (err) {
+                        res.send(err);
+                    }
+                });
+                res.send({success: "Rewiew created"})
+            }
+            else {
+                res.send({success: false, message: "Movie was not found"})
+            }
         });
 });
 
