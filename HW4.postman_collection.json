@@ -1,0 +1,330 @@
+{
+	"info": {
+		"_postman_id": "eecb236e-e589-4f5f-bcd4-b6f1af6a8453",
+		"name": "HW4",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "signin ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "sagar",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "sagar01",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "ucd",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://webapi-hw4.herokuapp.com/signin",
+					"protocol": "https",
+					"host": [
+						"webapi-hw4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Review ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYWFjMmY3ZDEzNzJiMTBjY2FiOGZhNSIsInVzZXJuYW1lIjoic2FnYXIwMSIsImlhdCI6MTUyMjM4MjEwNX0.ppIGZCuxHLv70srSrdzqdNHqcfr3k_3MDChTVL_bFUw"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Movie\": \"Pirates of the Caribbean\",\n\t\"Reviewer\": \"samrid\",\n\t\"Review\": \" One of the best movie ever \",\n\t\"Rating\": \"5\"\n}"
+				},
+				"url": {
+					"raw": "https://webapi-hw4.herokuapp.com/CreateReview",
+					"protocol": "https",
+					"host": [
+						"webapi-hw4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"CreateReview"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all Review ",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://webapi-hw4.herokuapp.com/getRev",
+					"protocol": "https",
+					"host": [
+						"webapi-hw4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"getRev"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movie with Review (Review=true)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://webapi-hw4.herokuapp.com/getMovieReview?Review=true",
+					"protocol": "https",
+					"host": [
+						"webapi-hw4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"getMovieReview"
+					],
+					"query": [
+						{
+							"key": "Review",
+							"value": "true"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all movie without reviews",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://webapi-hw4.herokuapp.com/getMovieReview",
+					"protocol": "https",
+					"host": [
+						"webapi-hw4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"getMovieReview"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "local getMovieReview?Review=true",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:8080/getMovieReview?Review=true",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getMovieReview"
+					],
+					"query": [
+						{
+							"key": "Review",
+							"value": "true"
+						}
+					]
+				},
+				"description": "local host get all movie with review"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/signin ",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name ",
+							"value": "sagar",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "sagar01",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "ucd",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/signin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/CreateReview",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYWFjMmY3ZDEzNzJiMTBjY2FiOGZhNSIsInVzZXJuYW1lIjoic2FnYXIwMSIsImlhdCI6MTUyMjM1ODQ2OH0.OzqcUQ2XavqlndxFMqJfo3iud16AAMMUSKn-7WIiAks"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Movie\": \"The Dark Knight\",\n\t\"Reviewer\": \"jhon\",\n\t\"Review\": \"The movie was great \",\n\t\"Rating\": \"5\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/CreateReview",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CreateReview"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/CreateReview Movie was not found!",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYWFjMmY3ZDEzNzJiMTBjY2FiOGZhNSIsInVzZXJuYW1lIjoic2FnYXIwMSIsImlhdCI6MTUyMjU1NzkxMX0.dD-tHuJ-6wMSCcHgYfPN7I3VHoeuJfS-rwS12tdTarc"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Movie\": \"NO A movie \",\n\t\"Reviewer\": \"sam\",\n\t\"Review\": \" The movie was good\",\n\t\"Rating\": \"4\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/CreateReview",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"CreateReview"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Invalid save (for a movie not in the database)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVhYWFjMmY3ZDEzNzJiMTBjY2FiOGZhNSIsInVzZXJuYW1lIjoic2FnYXIwMSIsImlhdCI6MTUyMjU1NzMyOX0.OK6JywVcVWaevOVOqevNviLl_wl7FH6sNS2o6ZozVxY"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Movie\": \"NO A movie \",\n\t\"Reviewer\": \"sam\",\n\t\"Review\": \" The movie was good\",\n\t\"Rating\": \"4\"\n}"
+				},
+				"url": {
+					"raw": "https://webapi-hw4.herokuapp.com/CreateReview",
+					"protocol": "https",
+					"host": [
+						"webapi-hw4",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"CreateReview"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
