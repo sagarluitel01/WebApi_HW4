@@ -8,12 +8,14 @@ var Movie = require('./Movie');
 var Review = require('./Review');
 var async = require('async');
 var rp = require('request-promise');
+var cors = require('cors');
 
 var app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(passport.initialize());
+app.use(cors());
 
 var router = express.Router();
 
