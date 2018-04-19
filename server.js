@@ -217,7 +217,7 @@ router.route('/getMovieReview').get(
         }
     });
 
-router.route('/movies').get(
+/*router.route('/movies').get(
     function (req, res) {
         if (req.query.Review ==='true') {
             Movie.aggregate([
@@ -239,7 +239,7 @@ router.route('/movies').get(
                 res.json({Movie: movies});
             })
         }
-    });
+    }); */
 
 
 const GA_TRACKING_ID = process.env.GA_KEY;
