@@ -217,6 +217,14 @@ router.route('/getMovieReview').get(
         }
     });
 
+router.route('/movies')
+    .get(authJwtController.isAuthenticated, function (req, res) {
+        Movie.find(function (err, movies) {
+            if (err) res.send(err);
+            res.json(movies);
+        });
+    })
+
 /*router.route('/movies').get(
     function (req, res) {
         if (req.query.Review ==='true') {
