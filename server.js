@@ -220,28 +220,27 @@ router.route('/getAllRev').get(
 
 router.route('/movies')
     .get(authJwtController.isAuthenticated, function (req, res) {
-        if (req.query.Review ==='true') {
-            Movie.aggregate([
-                {
-                    $lookup: {
+        var reviews = req.headers.reviews;
+        Movie.find(function (err, movies) {
+            if (err) res.send(err);
+            if(reviews === 'true'){
+                Movie.aggregate([{
+                    $lookup:{
                         from: "reviews",
-                        localField: "Title",
-                        foreignField: "Movie",
+                        localField: "title",
+                        foreignField: "movie",
                         as: 'review'
                     }
                 }
-            ], function (err, result) {
-                if (err) {
-                    res.send(err);
-                }
-                else res.send({Movie: result});
-            });
-            Movie.find(function (err, movies) {
-                if (err) res.send(err);
+                ], function (err, result) {
+                    if(err) res.send(err);
+                    else res.json(result);
+                });
+            } else {
                 res.json(movies);
-            });
-        }
-    })
+            }
+        });
+    });
 
 
 const GA_TRACKING_ID = process.env.GA_KEY;
