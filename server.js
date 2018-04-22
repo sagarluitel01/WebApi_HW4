@@ -217,17 +217,9 @@ router.route('/getMovieReview').get(
         }
     });
 
-router.route('/movies')
+/*router.route('/movies')
     .get(authJwtController.isAuthenticated, function (req, res) {
-        Movie.find(function (err, movies) {
-            if (err) res.send(err);
-            res.json(movies);
-        });
-    })
-
-/*router.route('/movies').get(
-    function (req, res) {
-        if (req.query.Review ==='true') {
+       if (req.query.Review ==='true') {
             Movie.aggregate([
                 {
                     $lookup:{
@@ -241,13 +233,11 @@ router.route('/movies')
                 if(err) {res.send(err);}
                 else res.send({Movie: result});
             });
-        }else {
-            Movie.find({}, function (err, movies) {
-                if(err) {res.send(err);}
-                res.json({Movie: movies});
-            })
-        }
-    });*/
+        Movie.find(function (err, movies) {
+            if (err) res.send(err);
+            res.json(movies);
+        });
+    })*/
 
 
 const GA_TRACKING_ID = process.env.GA_KEY;
