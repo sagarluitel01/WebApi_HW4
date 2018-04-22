@@ -4,9 +4,9 @@ var Schema = mongoose.Schema;
 mongoose.connect('mongodb://sagar01:D3goldhap@ds111535.mlab.com:11535/webapidatabase');
 
 var ReviewSchema = new Schema({
-    Movie: String,
-    Reviewer: String,
-    Review: String,
+    Movie: { type: String, required: true },
+    Reviewer:{ type: String, required: true },
+    Review: { type: String, required: true },
     Rating: {type: Number, required:true, min: 0, max: 5}
 });
 
