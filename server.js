@@ -220,10 +220,9 @@ router.route('/getAllRev').get(
 
 router.route('/movies')
     .get(authJwtController.isAuthenticated, function (req, res) {
-        var reviews = req.headers.reviews;
         Movie.find(function (err, movies) {
             if (err) res.send(err);
-            if(reviews === 'true'){
+            if(req.headers.Review === 'true'){
                 Movie.aggregate([{
                     $lookup:{
                         from: "reviews",
