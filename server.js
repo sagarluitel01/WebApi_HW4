@@ -193,7 +193,7 @@ router.route('/getAllRev').get(
         });
 });
 
-router.route('/movies').get(authJwtController.isAuthenticated,
+/*router.route('/movies').get(authJwtController.isAuthenticated,
     function (req, res) {
         if (req.query.Review ==='true') {
             Movie.aggregate([
@@ -215,10 +215,10 @@ router.route('/movies').get(authJwtController.isAuthenticated,
                 res.json({Movie: movies});
                 })
         }
-    });
+    });*/
 
 
-/*router.route('/movies')
+router.route('/movies')
     .get(authJwtController.isAuthenticated, function (req, res) {
         Movie.find(function (err, movies) {
             if (err) res.send(err);
@@ -239,7 +239,7 @@ router.route('/movies').get(authJwtController.isAuthenticated,
                 res.json(movies);
             }
         });
-    });*/
+    });
 
 
 const GA_TRACKING_ID = process.env.GA_KEY;
