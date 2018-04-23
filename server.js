@@ -193,7 +193,7 @@ router.route('/getAllRev').get(
         });
 });
 
-/*router.route('/getMovieReview').get(
+router.route('/getMovieReview').get(
     function (req, res) {
         if (req.query.Review ==='true') {
             Movie.aggregate([
@@ -216,7 +216,7 @@ router.route('/getAllRev').get(
                 })
         }
     });
-*/
+
 
 router.route('/movies')
     .get(authJwtController.isAuthenticated, function (req, res) {
