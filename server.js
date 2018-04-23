@@ -238,7 +238,6 @@ router.route('/movies')
                 ], function (err, result) {
                     if(err) res.send(err);
                     else {
-                        movies.sort((a, b),  parseFloat(b.avgRating) - parseFloat(a.avgRating));
                         res.json(result);
                     }
                 });
