@@ -244,7 +244,7 @@ router.route('/movies')
         });
     });
 
-router.route('/movies/:movieID') //******----***********
+router.route('/movies/:movieID')
     .get(authJwtController.isAuthenticated, function (req, res) {
         var id = req.params.movieID;
         Movie.findById(id, function(err, movie) {
@@ -264,7 +264,7 @@ router.route('/movies/:movieID') //******----***********
                     else res.json(result);
                 });
             } else {
-                Movie.find( function (err, movies) {
+                Movie.findById(id, function (err, movies) {
                     if(err) {res.send(err);}
                     res.json({Movie: movies});
                 })
