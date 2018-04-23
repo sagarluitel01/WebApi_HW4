@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 mongoose.connect('mongodb://sagar01:D3goldhap@ds111535.mlab.com:11535/webapidatabase');
 
-var Actors = new Schema({
+var actor = new Schema({
     ActorName: {type: String, required: true},
     CharacterName: {type: String, required: true},
 })
@@ -13,7 +13,7 @@ var MovieSchema = new Schema({
     Year: String,
     Genre: [ "Action", "Adventure", "Comedy", "Drama", "Fantasy", "Horror", "Mystery", "Thriller",
         "Western"],
-    Actors : {type: [Actors]}
+    Actors : {type: [actor]}
 });
 
 MovieSchema.pre('save', function(next) {
