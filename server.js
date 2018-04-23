@@ -193,7 +193,7 @@ router.route('/getAllRev').get(
         });
 });
 
-router.route('/getMovieReview').get(
+router.route('/movies').get(authJwtController.isAuthenticated,
     function (req, res) {
         if (req.query.Review ==='true') {
             Movie.aggregate([
@@ -218,7 +218,7 @@ router.route('/getMovieReview').get(
     });
 
 
-router.route('/movies')
+/*router.route('/movies')
     .get(authJwtController.isAuthenticated, function (req, res) {
         Movie.find(function (err, movies) {
             if (err) res.send(err);
@@ -239,7 +239,7 @@ router.route('/movies')
                 res.json(movies);
             }
         });
-    });
+    });*/
 
 
 const GA_TRACKING_ID = process.env.GA_KEY;
