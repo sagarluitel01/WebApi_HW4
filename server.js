@@ -222,7 +222,7 @@ router.route('/movies')
     .get(authJwtController.isAuthenticated, function (req, res) {
         Movie.find(function (err, movies) {
             if (err) res.send(err);
-            if(req.headers.Review === 'true'){
+            if(req.query.Review === 'true'){
                 Movie.aggregate([{
                     $lookup:{
                         from: "reviews",
@@ -236,7 +236,10 @@ router.route('/movies')
                     else res.json(result);
                 });
             } else {
-                res.json(movies);
+                Movie.find( function (err, movies) {
+                    if(err) {res.send(err);}
+                    res.json({Movie: movies});
+                })
             }
         });
     });
