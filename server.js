@@ -164,9 +164,7 @@ router.delete('/delete/:movieID', authJwtController.isAuthenticated, function (r
 router.post('/CreateReview', authJwtController.isAuthenticated, function (req, res) {
 
     var movie = req.body.movie;
-    movie.avgRating = 0; //avgrating
-    movie.TotalRating = 0;
-    movie.numOfRev = 0;
+
     Movie.findOne({Title: req.body.Movie},
         function (err, movie){
             if (err) res.send(err);
@@ -177,11 +175,7 @@ router.post('/CreateReview', authJwtController.isAuthenticated, function (req, r
                     if (err) {
                         res.send(err);
                     }
-                    movie.TotalRating = movie.TotalRating + newReview.Rating;
-                    movie.numOfRev = numOfRev + 1;
-                    movie.avgRating = movie.TotalRating/numOfRev;
                 });
-
                 res.send({success: "Rewiew created"})
             }
             else {
