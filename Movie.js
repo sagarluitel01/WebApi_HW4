@@ -13,7 +13,9 @@ var MovieSchema = new Schema({
     Year: String,
     Genre: [ "Action", "Adventure", "Comedy", "Drama", "Fantasy", "Horror", "Mystery", "Thriller",
         "Western"],
-    Actors : {type: [actor]}
+    Actors : {type: [actor]},
+    NumOfRev : {type: Number},
+    avgRating : {type: Number}
 });
 
 MovieSchema.pre('save', function(next) {

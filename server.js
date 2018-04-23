@@ -171,9 +171,14 @@ router.post('/CreateReview', authJwtController.isAuthenticated, function (req, r
 
             if(movie) {
                 var newReview = new Review(req.body);
+                movie.NumOfRev = movie.NumOfRev +1;
+                movie.avgRating = (movie.avgRating * (movie.NumOfRev -1) + req.body.Rating)/movie.NumOfRev;
                 newReview.save(function (err) {
                     if (err) {
                         res.send(err);
+                    }
+                    else {
+                        movie.save();
                     }
                 });
                 res.send({success: "Rewiew created"})
