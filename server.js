@@ -244,6 +244,34 @@ router.route('/movies')
         });
     });
 
+router.route('/movies/:movieID') //******----***********
+    .get(authJwtController.isAuthenticated, function (req, res) {
+        var id = req.params.movieID;
+        Movie.findById(id, function(err, movie) {
+            if (err) res.send(err);
+
+            if(req.query.Review === 'true'){
+                Movie.aggregate([{
+                    $lookup:{
+                        from: "reviews",
+                        localField: "Title",
+                        foreignField: "Movie",
+                        as: 'review'
+                    }
+                }
+                ], function (err, result) {
+                    if(err) res.send(err);
+                    else res.json(result);
+                });
+            } else {
+                Movie.find( function (err, movies) {
+                    if(err) {res.send(err);}
+                    res.json({Movie: movies});
+                })
+            }
+        });
+    });
+
 
 const GA_TRACKING_ID = process.env.GA_KEY;
 
