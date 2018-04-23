@@ -161,11 +161,11 @@ router.delete('/delete/:movieID', authJwtController.isAuthenticated, function (r
     });
 });
 
-router.post('/CreateReview', authJwtController.isAuthenticated, function (req, res) {
+router.post('/CreateReview/:movieID', authJwtController.isAuthenticated, function (req, res) {
 
     var movie = req.body.movie;
-
-    Movie.findOne({Title: req.body.Movie},
+    var id = req.params.movieID;
+    Movie.findById(id,
         function (err, movie){
             if (err) res.send(err);
 
@@ -237,7 +237,10 @@ router.route('/movies')
                 }
                 ], function (err, result) {
                     if(err) res.send(err);
-                    else res.json(result);
+                    else {
+                        movies.sort((a, b),  parseFloat(b.avgRating) - parseFloat(a.avgRating));
+                        res.json(result);
+                    }
                 });
             } else {
                 Movie.find( function (err, movies) {
