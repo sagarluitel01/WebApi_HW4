@@ -192,19 +192,19 @@ router.post('/CreateReview/:movieID', authJwtController.isAuthenticated, functio
 router.route('/createReview')
     .post(authJwtController.isAuthenticated, function (req, res) {
         if (!req.body.Movie) {
-            res.json({success: false, msg: 'Please pass Movie name. '});
+            res.json({success: false, msg: 'Enter Movie. '});
         }
 
         if (!req.body.Reviewer) {
-            res.json({success: false, msg: 'Please pass Reviewer name.'});
+            res.json({success: false, msg: 'Enter Reviewer name.'});
         }
 
         if (!req.body.Review) {
-            res.json({success: false, msg: 'Please pass the review.'});
+            res.json({success: false, msg: 'Enter the Review.'});
         }
 
         if (!req.body.Rating) {
-            res.json({success: false, msg: 'Please pass the rating.'});
+            res.json({success: false, msg: 'Enter Rating.'});
         }
 
 
@@ -223,12 +223,12 @@ router.route('/createReview')
                         if (err) {
                             return res.send(err);
                         }
-                        res.json({message: 'Review created!'});
+                        res.json({success: true, message: 'Review created!'});
                     });
                 }
                 else {
                     res.status(400);
-                    res.json({message: 'Movie not found in Database. Cannot save review.'});
+                    res.json({success: false, message: 'Movie not found.'});
                 }
             });
         }
