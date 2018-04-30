@@ -171,8 +171,6 @@ router.post('/CreateReview/:movieID', authJwtController.isAuthenticated, functio
 
             if(movie) {
                 var newReview = new Review(req.body);
-                movie.NumOfRev = movie.NumOfRev +1;
-                movie.avgRating = (movie.avgRating * (movie.NumOfRev -1) + req.body.Rating)/movie.NumOfRev;
                 newReview.save(function (err) {
                     if (err) {
                         res.send(err);
@@ -207,17 +205,12 @@ router.route('/createReview')
             res.json({success: false, msg: 'Enter Rating.'});
         }
 
-
         else {
             Movie.findOne({Title: req.body.Movie}).select('Title').exec(function (err, result) {
                 if (err) res.send(err);
 
                 if(result) {
-                    var review = new Review();
-                    review.Movie = req.body.Movie;
-                    review.Reviewer = req.body.Reviewer;
-                    review.Review = req.body.Review;
-                    review.Rating = req.body.Rating;
+                    var review = new Review(req.body);
 
                     review.save(function (err) {
                         if (err) {
