@@ -189,6 +189,51 @@ router.post('/CreateReview/:movieID', authJwtController.isAuthenticated, functio
         });
 });
 
+router.route('/createReview')
+    .post(authJwtController.isAuthenticated, function (req, res) {
+        if (!req.body.Movie) {
+            res.json({success: false, msg: 'Please pass Movie name. '});
+        }
+
+        if (!req.body.Reviewer) {
+            res.json({success: false, msg: 'Please pass Reviewer name.'});
+        }
+
+        if (!req.body.Review) {
+            res.json({success: false, msg: 'Please pass the review.'});
+        }
+
+        if (!req.body.Rating) {
+            res.json({success: false, msg: 'Please pass the rating.'});
+        }
+
+
+        else {
+            Movie.findOne({Title: req.body.Movie}).select('Title').exec(function (err, result) {
+                if (err) res.send(err);
+
+                if(result) {
+                    var review = new Review();
+                    review.Movie = req.body.Movie;
+                    review.Reviewer = req.body.Reviewer;
+                    review.Review = req.body.Review;
+                    review.Rating = req.body.Rating;
+
+                    review.save(function (err) {
+                        if (err) {
+                            return res.send(err);
+                        }
+                        res.json({message: 'Review created!'});
+                    });
+                }
+                else {
+                    res.status(400);
+                    res.json({message: 'Movie not found in Database. Cannot save review.'});
+                }
+            });
+        }
+    });
+
 router.route('/getAllRev').get(
     function (req, res) {
         Review.find(function (err, reviews) {
