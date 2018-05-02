@@ -15,6 +15,7 @@ var MovieSchema = new Schema({
         "Western"],
     Actors : {type: [actor]},
     NumOfRev : {type: Number},
+    TotalRating : {type: Number},
     avgRating : {type: Number}
 });
 

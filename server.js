@@ -108,6 +108,8 @@ router.post('/createmovie', function (req, res) {
 
         newMovie.save(function(err) {
             if (err) {
+                Movie.NumOfRev = 0;
+                Movie.TotalRating = 0
                 return res.send(err);
             }
             res.json({ message: 'Movie created!' });
@@ -154,6 +156,7 @@ router.route('/get').get(authJwtController.isAuthenticated,
 router.delete('/delete/:movieID', authJwtController.isAuthenticated, function (req, res) {
     var id = req.params.movieID;
     Movie.findById(id, function(err, movie) {
+
         if (err) res.send(err);
 
         movie.remove();
@@ -189,6 +192,7 @@ router.post('/CreateReview/:movieID', authJwtController.isAuthenticated, functio
 
 router.route('/createReview')
     .post(authJwtController.isAuthenticated, function (req, res) {
+        var id = req.params.movieID;
         if (!req.body.Movie) {
             res.json({success: false, msg: 'Enter Movie. '});
         }
@@ -206,12 +210,14 @@ router.route('/createReview')
         }
 
         else {
-            Movie.findOne({Title: req.body.Movie}).select('Title').exec(function (err, result) {
+            Movie.findById(id, function (err, result) {
                 if (err) res.send(err);
 
                 if(result) {
                     var review = new Review(req.body);
-
+                    Movie.NumOfRev += 1;
+                    Movie.TotalRating += req.body.Rating;
+                    Movie.avgRating = Movie.TotalRating/Movie.NumOfRev;
                     review.save(function (err) {
                         if (err) {
                             return res.send(err);
