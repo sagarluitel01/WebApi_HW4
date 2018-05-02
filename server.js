@@ -190,7 +190,7 @@ router.delete('/delete/:movieID', authJwtController.isAuthenticated, function (r
         });
 });*/
 
-router.route('/createReview/:movieID')
+router.route('/createReview/:movieIDs')
     .post(authJwtController.isAuthenticated, function (req, res) {
         var id = req.params.movieID;
         if (!req.body.Movie) {
