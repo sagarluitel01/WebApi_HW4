@@ -209,7 +209,7 @@ router.route('/createReview')
         }
 
         else {
-            Movie.findById(id, (function (err, result) {
+            Movie.findById({Title: req.body.Movie}).select('Title').exec(function (err, result) {
                 if (err) res.send(err);
 
                 if(result) {
