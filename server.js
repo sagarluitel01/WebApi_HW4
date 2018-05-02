@@ -164,7 +164,7 @@ router.delete('/delete/:movieID', authJwtController.isAuthenticated, function (r
     });
 });
 
-/*router.post('/CreateReview/:movieID', authJwtController.isAuthenticated, function (req, res) {
+router.post('/CreateReview/:movieID', authJwtController.isAuthenticated, function (req, res) {
 
     var movie = req.body.movie;
     var id = req.params.movieID;
@@ -188,11 +188,10 @@ router.delete('/delete/:movieID', authJwtController.isAuthenticated, function (r
                 res.send({success: false, message: "Movie was not found"})
             }
         });
-});*/
+});
 
-router.route('/createReview/:movieIDs')
+router.route('/createReview')
     .post(authJwtController.isAuthenticated, function (req, res) {
-        var id = req.params.movieID;
         if (!req.body.Movie) {
             res.json({success: false, msg: 'Enter Movie. '});
         }
@@ -210,7 +209,7 @@ router.route('/createReview/:movieIDs')
         }
 
         else {
-            Movie.findById(id, function (err, result) {
+            Movie.findById(id, (function (err, result) {
                 if (err) res.send(err);
 
                 if(result) {
