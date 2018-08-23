@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
-mongoose.connect('mongodb://sagar01:D3goldhap@ds111535.mlab.com:11535/webapidatabase');
+mongoose.connect('mongodb://user:password@ds111535.mlab.com:11535/webapidatabase');
 
 // user schema
 var UserSchema = new Schema({
