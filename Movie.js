@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-mongoose.connect('mongodb://sagar01:D3goldhap@ds111535.mlab.com:11535/webapidatabase');
+mongoose.connect('mongodb://username:password@ds111535.mlab.com:11535/webapidatabase');
 
 var actor = new Schema({
     ActorName: {type: String, required: true},
